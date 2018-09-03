@@ -1,0 +1,5 @@
+title: Test post from the "SteemCliPoster" Java App
+tags: test steemdev java steemj
+format: markdown
+
+This is a test post from the "SteemCliPoster" Java App.
