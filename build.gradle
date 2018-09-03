@@ -33,7 +33,7 @@ dependencies {
 	//compile 'eu.bittrade.libs:steemj-core:0.4.3'
 	//compile 'com.github.muksihs:steem-java-api-wrapper:5c3a24a'
 	//compile project(':steemj-core')
-	compile 'com.github.muksihs.steem-java-api-wrapper:steemj-core:0.4.6-20180901-01'
+	compile 'com.github.muksihs.steem-java-api-wrapper:steemj-core:0.4.6-20180903-00'
 	compile 'eu.bittrade.libs:steemj-image-upload:1.0.0'
 	compile 'org.apache.commons:commons-text:+'
 	//compile 'com.github.tommyettinger:blazingchain:1.4.+'
@@ -42,7 +42,7 @@ dependencies {
 	compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.25'
 	// https://mvnrepository.com/artifact/org.apache.commons/commons-math3
 	//compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
-	implementation 'com.github.CherokeeLanguage:SimpleTextUi:20180903'
+	compile 'com.github.CherokeeLanguage:SimpleTextUi:20180903'
 	
 }
  
