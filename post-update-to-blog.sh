@@ -26,11 +26,14 @@ echo "" >> "$msgfile"
 git log --branches=\* --after="1 week ago" | sed 's/<.*@.*>/[email redacted]/g' | sed 's/^commit /#### commit /g' >> "$msgfile"
 echo "" >> "$msgfile"
 echo "" >> "$msgfile"
-sed -i "s/\t/    /g" "$msgfile"
-NBSP=$(printf "\u00a0")
-sed -i "s/  /$NBSP /g" "$msgfile"
+sed -i 's/\&/\&amp;/g' "$msgfile"
+sed -i 's/</\&lt;/g' "$msgfile"
+sed -i 's/>/\&gt;/g' "$msgfile"
+sed -i 's/\t/    /g' "$msgfile"
+sed -i 's|  |\&nbsp; |g' "$msgfile"
 #java -jar ~/git/SteemCliPoster/build/libs/SteemCliPoster.jar \
 #	--auth-file ~/.steem/steem.properties \
+#	--no-escape \
 #	--file "$msgfile"
 cp tmp/log.new tmp/log.old
 
