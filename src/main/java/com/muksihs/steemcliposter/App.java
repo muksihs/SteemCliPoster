@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -128,18 +129,19 @@ public class App extends AbstractApp implements Runnable {
 
 	@Override
 	protected void execute() throws IOException, SecurityException, Exception {
+		Map<String, Object> extraMetadata = new HashMap<>();
+		extraMetadata.put("app", "SteemCliPoster/20180903");
 		SteemAccountInformation accountInfo = getKeyAuthData(authFile);
 		SteemJ steemJ = initilizeSteemJ(accountInfo);
 		for (File postFile : postFiles) {
 			PostData post = parsePostFile(postFile);
-			Map<String, Object> extraMetadata;
 			String format=post.getFormat();
 			String[] tags=post.getTags().toArray(new String[0]);
 			String content=post.getBody();
 			String title=post.getTitle();
 			waitCheckBeforePosting(steemJ);
 			log.info("Posting: "+title);
-			steemJ.createPost(title, content, tags, format, null);
+			steemJ.createPost(title, content, tags, format, extraMetadata);
 		}
 	}
 
@@ -235,7 +237,7 @@ public class App extends AbstractApp implements Runnable {
 		postData.setBody(body);
 		return postData;
 	}
-
+	
 	private void waitCheckBeforePosting(SteemJ steemJ) throws SteemCommunicationException, SteemResponseException {
 		long FIVE_MINUTES = 1000l * 60l * 5l;
 		SteemJConfig config = SteemJConfig.getInstance();
