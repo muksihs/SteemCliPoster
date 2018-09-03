@@ -26,7 +26,7 @@ echo "" >> "$msgfile"
 git log --branches=\* --after="1 week ago" | sed 's/<.*@.*>/[email redacted]/g' | sed 's/^commit /#### commit /g' >> "$msgfile"
 echo "" >> "$msgfile"
 echo "" >> "$msgfile"
-java -jar ~/git/SteemClientPoster/build/libs/SteemClientPoster.jar \
+java -jar ~/git/SteemCliPoster/build/libs/SteemCliPoster.jar \
 	--auth-file ~/.steem/steem.properties \
 	--file "$msgfile"
 cp tmp/log.new tmp/log.old
