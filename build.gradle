@@ -44,6 +44,7 @@ dependencies {
 	//compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
 	compile 'com.github.CherokeeLanguage:SimpleTextUi:20180903'
 	
+	testCompile 'org.testng:testng:6.+'
 }
  
 configurations.all {
@@ -89,4 +90,11 @@ eclipse {
 		}
 	}
 }
+
+test {
+  useTestNG()
+  systemProperty 'debug', 'debug'
+  testLogging.showStandardStreams = true
+}
+
 

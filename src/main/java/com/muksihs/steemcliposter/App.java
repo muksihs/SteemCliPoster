@@ -55,6 +55,7 @@ public class App extends AbstractApp implements Runnable {
 	/**
 	 * If true, steem API errors are silently ignored.
 	 */
+	@SuppressWarnings("unused")
 	private boolean ignoreErrors = false;
 
 	/**
@@ -63,9 +64,11 @@ public class App extends AbstractApp implements Runnable {
 	private boolean noEscape = false;
 
 	/**
-	 * If true, perform a basic HTML-ification of the message body.
+	 * If true, perform a basic HTML-ification of the message body.<br>
+	 * Basically just does a wrapping in &lt;html&gt;, considers double '\n\n' as
+	 * &lt;p&gt; marks, and converts consequetive spaces into space nbsp pairings
+	 * (to preserve spacing formating some)
 	 */
-	@SuppressWarnings("unused")
 	private boolean htmlify = false;
 
 	@Override
@@ -135,12 +138,12 @@ public class App extends AbstractApp implements Runnable {
 		SteemJ steemJ = initilizeSteemJ(accountInfo);
 		for (File postFile : postFiles) {
 			PostData post = parsePostFile(postFile);
-			String format=post.getFormat();
-			String[] tags=post.getTags().toArray(new String[0]);
-			String content=post.getBody();
-			String title=post.getTitle();
+			String format = post.getFormat();
+			String[] tags = post.getTags().toArray(new String[0]);
+			String content = post.getBody();
+			String title = post.getTitle();
 			waitCheckBeforePosting(steemJ);
-			log.info("Posting: "+title);
+			log.info("Posting: " + title);
 			steemJ.createPost(title, content, tags, format, extraMetadata);
 		}
 	}
@@ -227,17 +230,38 @@ public class App extends AbstractApp implements Runnable {
 			sb.append(iter.next());
 			sb.append("\n");
 		}
-		String body = sb.toString().trim()+"\n";
+		String body = sb.toString().trim() + "\n";
 		if (body.equals("\n")) {
-			throw new IllegalArgumentException("Missing BODY of message: " + postFile.getAbsolutePath());			
+			throw new IllegalArgumentException("Missing BODY of message: " + postFile.getAbsolutePath());
 		}
-		if (!noEscape) {
-			body = body.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");					
+		if (htmlify) {
+			body = htmlify(body);
+			postData.setFormat("text/html");
+		} else {
+			if (!noEscape) {
+				body = body.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+			}
 		}
 		postData.setBody(body);
 		return postData;
 	}
-	
+
+	public static String htmlify(String body) {
+		body = body.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+		body = body.replaceAll("  ", "&nbsp; ");
+		body = "\n\n"+body+"\n\n";
+		body = body.replaceAll("\n\n+", "\n\n");
+		for (String para: body.split("\n\n")) {
+			if (para.trim().isEmpty()) {
+				continue;
+			}
+			body = body.replace("\n\n"+para, "<p>"+para+"</p>");
+		}
+		body = body.trim();
+		body = body.replace("\n", "<br/>");
+		return "<html>"+body+"</html>\n";
+	}
+
 	private void waitCheckBeforePosting(SteemJ steemJ) throws SteemCommunicationException, SteemResponseException {
 		long FIVE_MINUTES = 1000l * 60l * 5l;
 		SteemJConfig config = SteemJConfig.getInstance();
@@ -254,8 +278,8 @@ public class App extends AbstractApp implements Runnable {
 			if (since >= FIVE_MINUTES) {
 				return;
 			}
-			long sleepFor = FIVE_MINUTES-since;
-			log.info("Last post was within 5 minutes. Sleeping "+NF.format(sleepFor/60000f)+" minutes.");
+			long sleepFor = FIVE_MINUTES - since;
+			log.info("Last post was within 5 minutes. Sleeping " + NF.format(sleepFor / 60000f) + " minutes.");
 			sleep(sleepFor);
 		}
 	}
