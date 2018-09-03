@@ -14,7 +14,7 @@ compileJava.options.encoding = 'UTF-8'
 
 task fatjar(type: FatCapsule) {
   	archiveName 'Far-Horizons-Steem.jar'
-	applicationClass 'com.muksihs.farhorizons.Main'
+	applicationClass 'com.muksihs.steemcliposter.Main'
 	capsuleManifest {
     	jvmArgs = ['-Dfile.encoding=UTF-8']
 	}
