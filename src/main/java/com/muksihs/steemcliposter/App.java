@@ -202,7 +202,7 @@ public class App extends AbstractApp implements Runnable {
 				if (!tag.matches("[a-z].*")) {
 					throw new IllegalArgumentException("Tags must start with a-z.");
 				}
-				if (!tag.equals(tag.replaceAll("[a-z0-9\\-_]", ""))) {
+				if (!tag.equals(tag.replaceAll("[^a-z0-9\\-_]", ""))) {
 					throw new IllegalArgumentException("Only a-z, 0-9, -, and _ are allowed in tags.");
 				}
 				postData.getTags().add(tag);
@@ -247,10 +247,12 @@ public class App extends AbstractApp implements Runnable {
 				lastPostTime = e.getLastRootPost();
 				break;
 			}
-			if (now.getDateTimeAsTimestamp() - lastPostTime.getDateTimeAsTimestamp() >= 1000l * 60l * 5l) {
+			long since = now.getDateTimeAsTimestamp() - lastPostTime.getDateTimeAsTimestamp();
+			if (since >= 1000l * 60l * 5l) {
 				return;
 			}
-			sleep(500);
+			log.info("Last post was within 5 minutes. Sleeping "+NF.format(since/60000f)+" minutes.");
+			sleep(since);
 		}
 	}
 
