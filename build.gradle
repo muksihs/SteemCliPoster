@@ -36,7 +36,7 @@ dependencies {
 	compile 'com.github.muksihs.steem-java-api-wrapper:steemj-core:0.4.6-20180901-01'
 	compile 'eu.bittrade.libs:steemj-image-upload:1.0.0'
 	compile 'org.apache.commons:commons-text:+'
-	compile 'com.github.tommyettinger:blazingchain:1.4.+'
+	//compile 'com.github.tommyettinger:blazingchain:1.4.+'
 	
 	// https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14
 	compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.25'
