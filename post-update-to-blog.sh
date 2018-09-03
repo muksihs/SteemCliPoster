@@ -11,6 +11,7 @@ mkdir tmp 2> /dev/null || true
 touch tmp/log.old
 git log --branches=\* --after="1 week ago" > tmp/log.new
 diff tmp/log.new tmp/log.old > /dev/null 2>&1 && exit
+if [ ! -s tmp/log.new ]; then exit; fi
 
 echo "Posting new message"
 msgfile="tmp/msg.txt"
@@ -19,7 +20,7 @@ echo "title: Updates for $(basename $(pwd)) within the past week. $when"  >> "$m
 echo "tags: utopian-io steemdev java steemj git-log"  >> "$msgfile"
 echo "format: markdown"  >> "$msgfile"
 echo "" >> "$msgfile"
-echo "<center>![simple-logo-update.png](https://cdn.steemitimages.com/DQmQMAuxmQoqbpAYJwExuXtwYPq5gc3xnazz8YWCtnzKiXF/simple-logo-update.png)</center>" >> "$msgfile"
+echo "![simple-logo-update.png](https://cdn.steemitimages.com/DQmQMAuxmQoqbpAYJwExuXtwYPq5gc3xnazz8YWCtnzKiXF/simple-logo-update.png)" >> "$msgfile"
 echo "" >> "$msgfile"
 echo "## $(basename $(pwd))" >> "$msgfile"
 echo "Updates for $(basename $(pwd)) in the past week. $when" >> "$msgfile"
