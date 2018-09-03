@@ -237,6 +237,7 @@ public class App extends AbstractApp implements Runnable {
 	}
 
 	private void waitCheckBeforePosting(SteemJ steemJ) throws SteemCommunicationException, SteemResponseException {
+		long FIVE_MINUTES = 1000l * 60l * 5l;
 		SteemJConfig config = SteemJConfig.getInstance();
 		AccountName account = config.getDefaultAccount();
 		while (true) {
@@ -248,11 +249,12 @@ public class App extends AbstractApp implements Runnable {
 				break;
 			}
 			long since = now.getDateTimeAsTimestamp() - lastPostTime.getDateTimeAsTimestamp();
-			if (since >= 1000l * 60l * 5l) {
+			if (since >= FIVE_MINUTES) {
 				return;
 			}
-			log.info("Last post was within 5 minutes. Sleeping "+NF.format(since/60000f)+" minutes.");
-			sleep(since);
+			long sleepFor = FIVE_MINUTES-since;
+			log.info("Last post was within 5 minutes. Sleeping "+NF.format(sleepFor/60000f)+" minutes.");
+			sleep(sleepFor);
 		}
 	}
 
