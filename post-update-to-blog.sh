@@ -19,6 +19,8 @@ echo "title: Updates for $(basename $(pwd)) within the past week. $when"  >> "$m
 echo "tags: utopian-io steemdev java steemj git-log"  >> "$msgfile"
 echo "format: markdown"  >> "$msgfile"
 echo "" >> "$msgfile"
+echo "<center>![simple-logo-update.png](https://cdn.steemitimages.com/DQmQMAuxmQoqbpAYJwExuXtwYPq5gc3xnazz8YWCtnzKiXF/simple-logo-update.png)</center>" >> "$msgfile"
+echo "" >> "$msgfile"
 echo "## $(basename $(pwd))" >> "$msgfile"
 echo "Updates for $(basename $(pwd)) in the past week. $when" >> "$msgfile"
 echo "" >> "$msgfile"

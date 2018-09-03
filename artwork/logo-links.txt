@@ -1,0 +1,2 @@
+logo: https://cdn.steemitimages.com/DQme6mKoTaoCks9toFzCBKAriFYw6vLysJvXeQDuM7cWw4a/simple-logo.png
+gitlog logo: 
