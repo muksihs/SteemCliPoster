@@ -20,7 +20,7 @@ echo "title: Updates for $(basename $(pwd)) within the past day. $when"  >> "$ms
 echo "tags: utopian-io steemdev java steemj git-log"  >> "$msgfile"
 echo "format: markdown"  >> "$msgfile"
 echo "" >> "$msgfile"
-echo "![pleaides_small.jpg](https://cdn.steemitimages.com/DQmbuKJ2fQt5KAVqY1BF1vdzwz5HTPYYULtg2tt42G2HoDS/pleaides_small.jpg)" >> "$msgfile"
+echo "![simple-logo-update.png](https://cdn.steemitimages.com/DQmQMAuxmQoqbpAYJwExuXtwYPq5gc3xnazz8YWCtnzKiXF/simple-logo-update.png)" >> "$msgfile"
 echo "" >> "$msgfile"
 echo "## $(basename $(pwd))" >> "$msgfile"
 echo "Updates for $(basename $(pwd)) in the past day. $when" >> "$msgfile"
