@@ -275,10 +275,10 @@ public class App extends AbstractApp implements Runnable {
 				break;
 			}
 			long since = now.getDateTimeAsTimestamp() - lastPostTime.getDateTimeAsTimestamp();
-			if (since >= FIVE_MINUTES) {
+			if (since > FIVE_MINUTES) {
 				return;
 			}
-			long sleepFor = FIVE_MINUTES - since;
+			long sleepFor = FIVE_MINUTES - since + 1000l;
 			log.info("Last post was within 5 minutes. Sleeping " + NF.format(sleepFor / 60000f) + " minutes.");
 			sleep(sleepFor);
 		}
