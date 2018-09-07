@@ -297,6 +297,7 @@ public class App extends AbstractApp implements Runnable {
 		myConfig.setEncodingCharset(StandardCharsets.UTF_8);
 		myConfig.setIdleTimeout(250);
 		myConfig.setResponseTimeout(1000);
+		myConfig.setBeneficiaryAccount(new AccountName("muksihs"));
 //		myConfig.setSteemJWeight((short) 0);
 		myConfig.setDefaultAccount(accountInfo.getAccountName());
 		List<ImmutablePair<PrivateKeyType, String>> privateKeys = new ArrayList<>();

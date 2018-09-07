@@ -7,7 +7,7 @@ apply plugin: 'eclipse-wtp'
 
 group "com.muksihs"
 
-version = '20180903'
+version = '20180907'
 
 sourceCompatibility = 1.8
 compileJava.options.encoding = 'UTF-8'
@@ -33,7 +33,7 @@ dependencies {
 	//compile 'eu.bittrade.libs:steemj-core:0.4.3'
 	//compile 'com.github.muksihs:steem-java-api-wrapper:5c3a24a'
 	//compile project(':steemj-core')
-	compile 'com.github.muksihs.steem-java-api-wrapper:steemj-core:0.4.6-20180903-00'
+	compile 'com.github.muksihs.steem-java-api-wrapper:steemj-core:0.4.6-20180907-00'
 	compile 'eu.bittrade.libs:steemj-image-upload:1.0.0'
 	compile 'org.apache.commons:commons-text:+'
 	//compile 'com.github.tommyettinger:blazingchain:1.4.+'
